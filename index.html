@@ -3,121 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>anjaneya@portfolio:~$</title>
+<title>Anjaneya Tripathi — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0c0f0a;
-    --bg-alt:#12160f;
-    --fg:#c8f0c0;
-    --fg-dim:#6fa367;
-    --accent:#7CFC00;
-    --accent2:#f0e68c;
-    --err:#ff6b6b;
-    --border:#2a3a24;
-    --font: "SF Mono","Fira Code","JetBrains Mono",Consolas,Menlo,monospace;
+    --bg:#0f1420;
+    --bg-gutter:#0b0f18;
+    --fg:#d6dce8;
+    --fg-bright:#f2f5fa;
+    --fg-dim:#9db0d1;
+    --fg-faint:#5c6a8c;
+    --line-no:#3a4358;
+    --green:#6fcf97;
+    --blue:#7fb4e8;
+    --amber:#e8c07d;
+    --border:#1c2436;
+    --font:'JetBrains Mono', Consolas, Menlo, monospace;
   }
   *{box-sizing:border-box;}
-  html,body{
-    margin:0;padding:0;
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
     background:var(--bg);
     color:var(--fg);
     font-family:var(--font);
-    font-size:15px;
-    line-height:1.55;
+    font-size:16px;
+    line-height:1.6;
   }
-  body{
-    background-image:
-      radial-gradient(rgba(124,252,0,0.035) 1px, transparent 1px);
-    background-size: 3px 3px;
-  }
-  .crt::before{
-    content:"";
-    position:fixed;inset:0;
-    pointer-events:none;
-    background:repeating-linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.0) 0px,
-      rgba(0,0,0,0.0) 1px,
-      rgba(0,0,0,0.06) 2px,
-      rgba(0,0,0,0.0) 3px
-    );
-    z-index:50;
-    opacity:0.5;
-  }
-  .wrap{
-    max-width:880px;
+  a{color:var(--blue);text-decoration:none;}
+  a:hover{color:var(--amber);text-decoration:underline;}
+
+  .layout{
+    display:flex;
+    max-width:1280px;
     margin:0 auto;
-    padding:28px 20px 90px;
   }
-  .titlebar{
-    display:flex;align-items:center;gap:8px;
-    background:var(--bg-alt);
-    border:1px solid var(--border);
-    border-bottom:none;
-    border-radius:8px 8px 0 0;
-    padding:10px 14px;
-    position:sticky;top:0;
-    z-index:10;
-  }
-  .dot{width:11px;height:11px;border-radius:50%;}
-  .dot.r{background:#ff5f56;}
-  .dot.y{background:#ffbd2e;}
-  .dot.g{background:#27c93f;}
-  .titlebar span.name{
-    margin-left:10px;color:var(--fg-dim);font-size:13px;
-  }
-  .term{
-    border:1px solid var(--border);
-    border-top:none;
-    background:rgba(0,0,0,0.35);
-    border-radius:0 0 8px 8px;
-    padding:22px 22px 8px;
-  }
-  .line{margin:0 0 4px;white-space:pre-wrap;word-break:break-word;}
-  .prompt{color:var(--accent);}
-  .path{color:var(--accent2);}
-  .cmd{color:var(--fg);}
-  .out{color:var(--fg-dim);margin:2px 0 18px 0;}
-  .out b, .out strong{color:var(--fg);font-weight:600;}
-  .section-title{
-    color:var(--accent);
-    margin-top:6px;
-  }
-  a{color:var(--accent2);text-decoration:none;border-bottom:1px dashed var(--fg-dim);}
-  a:hover{color:var(--accent);border-color:var(--accent);}
-  .grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:6px 26px;
-    margin:4px 0 18px 0;
-  }
-  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
-  .tag{
-    display:inline-block;
-    border:1px solid var(--border);
-    color:var(--fg);
-    padding:2px 8px;
-    margin:3px 4px 3px 0;
-    border-radius:4px;
+  .gutter{
+    width:56px;
+    flex-shrink:0;
+    background:var(--bg-gutter);
+    color:var(--line-no);
     font-size:13px;
-    background:rgba(124,252,0,0.04);
+    padding:72px 14px 0 0;
+    text-align:right;
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:none;
   }
-  .proj{
-    border-left:2px solid var(--border);
-    padding:2px 0 10px 14px;
-    margin:6px 0 18px 2px;
+  @media(min-width:900px){ .gutter{display:block;} }
+  .gutter div{padding:2px 0;}
+
+  main{
+    flex-grow:1;
+    padding:56px 28px 90px;
   }
-  .proj h3{margin:0 0 4px;color:var(--fg);font-size:15px;}
-  .proj .meta{color:var(--fg-dim);font-size:12px;margin-bottom:6px;}
-  .divider{color:var(--border);margin:4px 0 18px;}
-  .blink{
-    display:inline-block;width:9px;height:16px;
-    background:var(--accent);
-    vertical-align:middle;
-    animation:blink 1s steps(1) infinite;
+  @media(min-width:900px){ main{padding:72px 80px 100px 40px;} }
+
+  .code-line{font-size:14px;color:var(--fg-faint);margin:0 0 4px;}
+  .code-line .kw{color:var(--fg-faint);}
+  .code-line .var{color:var(--blue);}
+  .code-line .str{color:var(--amber);}
+
+  h1{
+    margin:6px 0 4px;
+    font-size:clamp(34px,5vw,50px);
+    font-weight:600;
+    color:var(--fg-bright);
+    letter-spacing:-0.01em;
   }
-  @keyframes blink{50%{opacity:0;}}
-  #input-row{display:flex;align-items:center;gap:6px;padding-bottom:18px;}
+  .role{
+    font-size:19px;
+    color:var(--fg-dim);
+    margin-bottom:44px;
+  }
+
+  section{margin-bottom:48px;}
+  .tag{
+    font-size:14px;
+    color:var(--green);
+    margin-bottom:18px;
+  }
+
+  .job{margin-bottom:32px;}
+  .job:last-child{margin-bottom:0;}
+  .job-head{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:6px 16px;
+    margin-bottom:10px;
+  }
+  .job-title{
+    font-size:18px;
+    font-weight:600;
+    color:var(--fg-bright);
+  }
+  .job-meta{
+    font-size:13px;
+    color:var(--fg-faint);
+    white-space:nowrap;
+  }
+  ul.points{
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:13px;
+  }
+  ul.points li{
+    display:flex;
+    gap:12px;
+    font-size:15.5px;
+    line-height:1.65;
+    color:var(--fg);
+  }
+  ul.points li .mark{
+    color:var(--green);
+    flex-shrink:0;
+  }
+  ul.points li strong{
+    color:var(--amber);
+    font-weight:600;
+  }
+
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  @media(min-width:760px){ .two-col{grid-template-columns:1fr 1fr;} }
+
+  .kv{display:flex;flex-direction:column;gap:9px;font-size:15px;}
+  .kv .row span.k{color:var(--blue);}
+  .kv .row span.v{color:var(--fg);}
+
+  .skill-group{margin-bottom:14px;}
+  .skill-group:last-child{margin-bottom:0;}
+  .skill-group .k{color:var(--blue);font-size:14.5px;}
+  .skill-group .v{color:var(--fg);font-size:14.5px;}
+
+  .contact-list{display:flex;flex-direction:column;gap:8px;font-size:15px;}
+
+  footer{
+    font-size:12.5px;
+    color:var(--fg-faint);
+    border-top:1px solid var(--border);
+    padding-top:22px;
+    margin-top:20px;
+  }
+
+  /* interactive command line */
+  .console{
+    margin-top:56px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:rgba(255,255,255,0.015);
+    padding:18px 20px;
+  }
+  .console .hint{color:var(--fg-faint);font-size:13px;margin-bottom:14px;}
+  .console-line{font-size:14.5px;color:var(--fg);margin:0 0 6px;white-space:pre-wrap;word-break:break-word;}
+  .console-out{color:var(--fg-dim);margin:0 0 16px;}
+  .console-input-row{display:flex;align-items:center;gap:6px;}
+  .console-input-row .p{color:var(--green);}
   #cmdInput{
     flex:1;
     background:transparent;
@@ -125,191 +177,186 @@
     outline:none;
     color:var(--fg);
     font-family:var(--font);
-    font-size:15px;
-    caret-color:var(--accent);
+    font-size:14.5px;
+    caret-color:var(--green);
   }
-  .hint{color:var(--fg-dim);font-size:12px;margin:0 0 10px;}
-  .footer{
-    text-align:center;color:var(--fg-dim);font-size:12px;margin-top:18px;
+  .blink{
+    display:inline-block;width:8px;height:15px;
+    background:var(--green);
+    animation:blink 1s steps(1) infinite;
   }
+  @keyframes blink{50%{opacity:0;}}
 </style>
 </head>
-<body class="crt">
-<div class="wrap">
+<body>
+<div class="layout">
 
-  <div class="titlebar">
-    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-    <span class="name">anjaneya@portfolio: ~</span>
+  <div class="gutter">
+    <div>01</div><div>02</div><div>03</div><div>04</div><div>05</div>
+    <div>06</div><div>07</div><div>08</div><div>09</div><div>10</div>
+    <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
+    <div>16</div><div>17</div><div>18</div><div>19</div><div>20</div>
   </div>
 
-  <div class="term" id="term">
+  <main>
+    <p class="code-line"><span class="kw">const</span> <span class="var">engineer</span> = <span class="str">"Anjaneya Tripathi"</span></p>
+    <h1>Anjaneya Tripathi</h1>
+    <div class="role">// Software Engineer — Cloud Platforms, Distributed Systems, Data and AI</div>
 
-    <p class="line"><span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$ <span class="cmd">whoami</span></p>
-    <p class="out">
-      <strong>Anjaneya Tripathi</strong> — Software Engineer<br>
-      Cloud Platforms · Distributed Systems · Data and AI · Oracle<br>
-      Based in India
-    </p>
+    <section>
+      <div class="tag">// about</div>
+      <p style="font-size:15.5px; line-height:1.7; color:var(--fg); max-width:760px; margin:0;">
+        Software engineer with 4+ years of experience building cloud capacity-management
+        platforms, distributed systems, microservices, REST APIs, data-processing pipelines,
+        forecasting systems, deployment automation, production monitoring, and generative AI /
+        agentic AI tools. Led end-to-end delivery across backend, data, infrastructure, and
+        user-facing components — reducing high-severity operational alerts by 50–80% and
+        forecast runtime and compute-resource consumption by 65%.
+      </p>
+    </section>
 
-    <p class="line"><span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$ <span class="cmd">cat about.txt</span></p>
-    <p class="out">
-      Software engineer with 4+ years of experience building cloud capacity-management
-      platforms, distributed systems, microservices, REST APIs, data-processing
-      pipelines, forecasting systems, deployment automation, production monitoring,
-      and generative AI / agentic AI tools. Led end-to-end delivery across backend,
-      data, infrastructure, and user-facing components — reducing high-severity
-      operational alerts by 50–80% and forecast runtime and compute-resource
-      consumption by 65%.
-    </p>
+    <section>
+      <div class="tag">// experience</div>
 
-    <p class="line"><span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$ <span class="cmd">cat experience.log</span></p>
-    <div class="out">
-      <div class="proj">
-        <h3>Senior Software Engineer — Oracle</h3>
-        <div class="meta">Oct 2025 – Present · India</div>
-        • Built a retrieval-augmented generation (RAG) NL2SQL assistant using
-        LangChain/LangGraph, Python, and PostgreSQL, integrating product documentation,
-        semantic retrieval, schema-aware database tools, and query execution to enable
-        natural-language analysis of capacity-management data.<br>
-        • Reduced overall information retrieval time by 50% for simple queries and
-        80% for complex queries spanning multiple resources across regions and realms.<br>
-        • Designed and built REST APIs for a proactive alarming and notification
-        feature that alerts and emails users when usage crosses user-defined capacity
-        thresholds.<br>
-        • Eliminated the need for users to manually log in daily to check capacity
-        limits and remaining headroom, reducing manual overhead by 90%.
+      <div class="job">
+        <div class="job-head">
+          <div class="job-title">Senior Software Engineer, Oracle</div>
+          <div class="job-meta">Oct 2025 — Present · India</div>
+        </div>
+        <ul class="points">
+          <li><span class="mark">✓</span><span>Built a retrieval-augmented generation (RAG) NL2SQL assistant using LangChain/LangGraph, Python, and PostgreSQL, integrating product documentation, semantic retrieval, schema-aware database tools, and query execution for natural-language analysis of capacity-management data.</span></li>
+          <li><span class="mark">✓</span><span>Reduced overall information retrieval time by <strong>50%</strong> for simple queries and <strong>80%</strong> for complex queries spanning multiple resources across regions and realms.</span></li>
+          <li><span class="mark">✓</span><span>Designed and built REST APIs for a proactive alarming and notification feature that alerts and emails users when usage crosses user-defined capacity thresholds.</span></li>
+          <li><span class="mark">✓</span><span>Eliminated the need for users to manually log in daily to check capacity limits and remaining headroom, reducing manual overhead by <strong>90%</strong>.</span></li>
+        </ul>
       </div>
-      <div class="proj">
-        <h3>Software Engineer — Oracle</h3>
-        <div class="meta">Jun 2022 – Sep 2025 · India</div>
-        • Automated new-region onboarding and release workflows using Terraform for
-        cloud tenancy provisioning, deployment-target generation, configuration
-        management, and production validation, cutting delivery effort from 3 days
-        to 1 hour.<br>
-        • Re-engineered scheduled, distributed data-processing and forecasting
-        workflows, reducing high-severity operational alerts by 50–80% and cutting
-        forecast runtime and compute-resource consumption by 65%.<br>
-        • Designed and built synthetic monitoring and CI/CD production health checks
-        for service availability, authentication flows, and deployment correctness,
-        reducing detection time by 50%.<br>
-        • Mentored an intern over six months, guiding scope, execution, and delivery
-        of their engineering work.<br>
-        • Led internal sessions on agentic AI coding best practices, helping the team
-        adopt AI-assisted engineering tools (Claude Code, Codex) effectively.<br>
-        • Built a dashboard giving leadership visibility into service adoption and
-        which features and resources customers cared about most.
+
+      <div class="job">
+        <div class="job-head">
+          <div class="job-title">Software Engineer, Oracle</div>
+          <div class="job-meta">Jun 2022 — Sep 2025 · India</div>
+        </div>
+        <ul class="points">
+          <li><span class="mark">✓</span><span>Automated new-region onboarding and release workflows using Terraform for cloud tenancy provisioning, deployment-target generation, configuration management, and production validation — cutting delivery effort from <strong>3 days to 1 hour</strong>.</span></li>
+          <li><span class="mark">✓</span><span>Re-engineered scheduled, distributed data-processing and forecasting workflows, reducing high-severity operational alerts by <strong>50–80%</strong> and cutting forecast runtime and compute-resource consumption by <strong>65%</strong>.</span></li>
+          <li><span class="mark">✓</span><span>Designed and built synthetic monitoring and CI/CD production health checks for service availability, authentication flows, and deployment correctness, reducing detection time by <strong>50%</strong>.</span></li>
+          <li><span class="mark">✓</span><span>Mentored an intern over six months, guiding scope, execution, and delivery of their engineering work.</span></li>
+          <li><span class="mark">✓</span><span>Led internal sessions on agentic AI coding best practices, helping the team adopt AI-assisted engineering tools (Claude Code, Codex) effectively.</span></li>
+          <li><span class="mark">✓</span><span>Built a dashboard giving leadership visibility into service adoption and which features and resources customers cared about most.</span></li>
+        </ul>
       </div>
-      <div class="proj">
-        <h3>Software Engineering Intern — Convint.ai</h3>
-        <div class="meta">Dec 2021 – Jun 2022 · India</div>
-        • Collaborated directly with the founders to take a conversational-AI
-        interview platform from concept to an initial working product, contributing
-        across product design and end-to-end application development.<br>
-        • Implemented core conversational interview workflows that orchestrated
-        AI-driven candidate interactions and enabled users to complete automated
-        interviews.
+
+      <div class="job">
+        <div class="job-head">
+          <div class="job-title">Software Engineering Intern, Convint.ai</div>
+          <div class="job-meta">Dec 2021 — Jun 2022 · India</div>
+        </div>
+        <ul class="points">
+          <li><span class="mark">✓</span><span>Collaborated directly with the founders to take a conversational-AI interview platform from concept to an initial working product, contributing across product design and end-to-end application development.</span></li>
+          <li><span class="mark">✓</span><span>Implemented core conversational interview workflows that orchestrated AI-driven candidate interactions and enabled users to complete automated interviews.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="tag">// projects</div>
+      <div class="two-col">
+        <div class="job" style="margin-bottom:0;">
+          <div class="job-head">
+            <div class="job-title">c-compiler</div>
+            <div class="job-meta"><a href="https://github.com/AnjaneyaTripathi/c-compiler" target="_blank">github ↗</a></div>
+          </div>
+          <p style="font-size:15px; line-height:1.6; color:var(--fg); margin:0;">
+            A compiler that accepts any valid program written in C, built using Lex and Yacc.
+            Produces a symbol table, parse tree, annotated syntax tree, and intermediate code.
+          </p>
+        </div>
+        <div class="job" style="margin-bottom:0;">
+          <div class="job-head">
+            <div class="job-title">knowledge_graph</div>
+            <div class="job-meta"><a href="https://github.com/AnjaneyaTripathi/knowledge_graph" target="_blank">github ↗</a></div>
+          </div>
+          <p style="font-size:15px; line-height:1.6; color:var(--fg); margin:0;">
+            Knowledge graph for legal documents built from SEC litigation releases. Classifies
+            filings into crime types and extracts key entities — violator, violation, and
+            action taken by authorities.
+          </p>
+        </div>
+      </div>
+    </section>
+      <section style="margin-bottom:0;">
+        <div class="tag">// skills</div>
+        <div class="skill-group">
+          <span class="k">languages:</span> <span class="v">Java, Python, SQL, JavaScript, C++</span>
+        </div>
+        <div class="skill-group">
+          <span class="k">backend_cloud:</span> <span class="v">REST APIs, Distributed Systems, Terraform, Deployment Automation, Monitoring, React</span>
+        </div>
+        <div class="skill-group">
+          <span class="k">data_ai:</span> <span class="v">Apache Spark, ETL/ELT, Forecasting, RAG, NL2SQL, LLMs, NLP, Knowledge Graphs</span>
+        </div>
+        <div class="skill-group">
+          <span class="k">tools:</span> <span class="v">Git, Docker, CI/CD, Claude Code, OpenAI Codex</span>
+        </div>
+      </section>
+
+      <section style="margin-bottom:0;">
+        <div class="tag">// education</div>
+        <div style="font-size:15.5px; color:var(--fg); margin-bottom:28px;">
+          <strong style="color:var(--fg-bright);">B.Tech (Hons), Computer Science</strong><br>
+          National Institute of Technology, Tiruchirappalli<br>
+          CGPA: 9.19 / 10.00 · 2018 — 2022
+        </div>
+
+        <div class="tag">// contact</div>
+        <div class="contact-list">
+          <div><span style="color:var(--blue);">email:</span> <a href="mailto:anjaneya532000@gmail.com">anjaneya532000@gmail.com</a></div>
+          <div><span style="color:var(--blue);">github:</span> <a href="https://github.com/AnjaneyaTripathi" target="_blank">github.com/AnjaneyaTripathi</a></div>
+          <div><span style="color:var(--blue);">linkedin:</span> <a href="https://www.linkedin.com/in/anjaneya-tripathi-610234183/" target="_blank">linkedin.com/in/anjaneya-tripathi</a></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="console">
+      <div class="hint">try: help, whoami, experience, projects, skills, education, contact, clear</div>
+      <div id="output"></div>
+      <div class="console-input-row">
+        <span class="p">$</span>
+        <input id="cmdInput" type="text" autocomplete="off" spellcheck="false">
+        <span class="blink"></span>
       </div>
     </div>
 
-    <p class="line"><span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$ <span class="cmd">cat skills.txt</span></p>
-    <div class="out">
-      <div class="grid">
-        <div>
-          <div class="section-title">Languages</div>
-          <span class="tag">Java</span>
-          <span class="tag">Python</span>
-          <span class="tag">SQL</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">C++</span>
-        </div>
-        <div>
-          <div class="section-title">Backend &amp; Cloud</div>
-          <span class="tag">REST APIs</span>
-          <span class="tag">Distributed Systems</span>
-          <span class="tag">Terraform</span>
-          <span class="tag">Deployment Automation</span>
-          <span class="tag">Monitoring</span>
-          <span class="tag">React</span>
-        </div>
-        <div>
-          <div class="section-title">Data &amp; AI</div>
-          <span class="tag">Apache Spark</span>
-          <span class="tag">ETL / ELT</span>
-          <span class="tag">Forecasting</span>
-          <span class="tag">RAG</span>
-          <span class="tag">NL2SQL</span>
-          <span class="tag">LLMs</span>
-          <span class="tag">NLP</span>
-          <span class="tag">Knowledge Graphs</span>
-        </div>
-        <div>
-          <div class="section-title">Tools &amp; AI-Assisted Coding</div>
-          <span class="tag">Git</span>
-          <span class="tag">Docker</span>
-          <span class="tag">CI/CD</span>
-          <span class="tag">Claude Code</span>
-          <span class="tag">OpenAI Codex</span>
-        </div>
-      </div>
-    </div>
-
-    <p class="line"><span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$ <span class="cmd">cat education.txt</span></p>
-    <p class="out">
-      B.Tech (Hons), Computer Science — National Institute of Technology, Tiruchirappalli<br>
-      CGPA: 9.19 / 10.00<br>
-      2018 – 2022 · Tiruchirappalli, India
-    </p>
-
-    <p class="line"><span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$ <span class="cmd">cat contact.txt</span></p>
-    <p class="out">
-      Email: <a href="mailto:anjaneya532000@gmail.com">anjaneya532000@gmail.com</a><br>
-      GitHub: <a href="https://github.com/AnjaneyaTripathi" target="_blank">github.com/AnjaneyaTripathi</a><br>
-      LinkedIn: <a href="#" target="_blank">linkedin.com/in/&lt;add-your-handle&gt;</a>
-    </p>
-
-    <p class="divider">────────────────────────────────────────────</p>
-    <p class="hint">Type a command (try: help, whoami, experience, skills, contact, clear) and press Enter.</p>
-
-    <div id="output"></div>
-
-    <div id="input-row">
-      <span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$&nbsp;
-      <input id="cmdInput" type="text" autocomplete="off" spellcheck="false" autofocus>
-      <span class="blink"></span>
-    </div>
-
-  </div>
-
-  <p class="footer">built in a terminal, for the terminal — 2026</p>
+    <footer>Editor Terminal — built for GitHub Pages · 2026</footer>
+  </main>
 </div>
 
 <script>
   const output = document.getElementById('output');
   const input = document.getElementById('cmdInput');
-  const term = document.getElementById('term');
 
   const commands = {
-    help: "Available commands: whoami, about, experience, skills, education, contact, clear",
+    help: "Available commands: whoami, about, experience, projects, skills, education, contact, clear",
     whoami: "Anjaneya Tripathi — Software Engineer, Oracle. Cloud Platforms, Distributed Systems, Data and AI. Based in India.",
     about: "4+ years building cloud capacity-management platforms, distributed systems, data pipelines, and GenAI/agentic AI tools at Oracle.",
-    experience: "Senior SWE, Oracle (Oct 2025–Present) | SWE, Oracle (Jun 2022–Sep 2025) | Intern, Convint.ai (Dec 2021–Jun 2022)",
+    experience: "Senior SWE, Oracle (Oct 2025-Present) | SWE, Oracle (Jun 2022-Sep 2025) | Intern, Convint.ai (Dec 2021-Jun 2022)",
+    projects: "c-compiler (Lex/Yacc C compiler) | knowledge_graph (legal knowledge graph from SEC litigation releases)",
     skills: "Java, Python, SQL, JavaScript, C++, REST APIs, Distributed Systems, Terraform, Spark, RAG, NL2SQL, LLMs, Docker, CI/CD",
-    education: "B.Tech (Hons) CS — NIT Tiruchirappalli, CGPA 9.19/10.00, 2018–2022",
+    education: "B.Tech (Hons) CS - NIT Tiruchirappalli, CGPA 9.19/10.00, 2018-2022",
     contact: "anjaneya532000@gmail.com | github.com/AnjaneyaTripathi",
   };
 
-  function printLine(text, cls){
+  function printLine(text){
     const p = document.createElement('p');
-    p.className = cls || 'out';
+    p.className = 'console-out';
     p.textContent = text;
     output.appendChild(p);
   }
 
   function runCommand(raw){
     const cmdLine = document.createElement('p');
-    cmdLine.className = 'line';
-    cmdLine.innerHTML = '<span class="prompt">anjaneya@portfolio</span>:<span class="path">~</span>$ <span class="cmd">' +
-      raw.replace(/</g,'&lt;') + '</span>';
+    cmdLine.className = 'console-line';
+    cmdLine.innerHTML = '<span style="color:var(--green);">$</span> ' + raw.replace(/</g,'&lt;');
     output.appendChild(cmdLine);
 
     const cmd = raw.trim().toLowerCase();
@@ -318,7 +365,7 @@
     if (commands[cmd]) {
       printLine(commands[cmd]);
     } else {
-      printLine('command not found: ' + raw + '  (try "help")', 'out');
+      printLine('command not found: ' + raw + '  (try "help")');
     }
   }
 
@@ -327,11 +374,8 @@
       const val = input.value;
       input.value = '';
       runCommand(val);
-      window.scrollTo(0, document.body.scrollHeight);
     }
   });
-
-  term.addEventListener('click', () => input.focus());
 </script>
 </body>
 </html>
